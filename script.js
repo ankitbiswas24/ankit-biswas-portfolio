@@ -600,3 +600,74 @@
 
   requestAnimationFrame(draw);
 })();
+
+
+/* V19 — replay card animation on downward scroll.
+   Cards replay only after meaningful downward movement, so the effect feels
+   intentional instead of flickering on every tiny wheel event. */
+(() => {
+  const cards = Array.from(document.querySelectorAll(
+    '.depth-card, .project-card, .skill-card, .info-card, .fold-card'
+  ));
+  if (!cards.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let lastY = scrollY;
+  let accumulatedDown = 0;
+  let lastReplay = 0;
+  let ticking = false;
+
+  function replayVisibleCards(){
+    const now = performance.now();
+    if (now-lastReplay < 260) return;
+
+    const visible = [];
+    for (const card of cards){
+      const r = card.getBoundingClientRect();
+      // Animate cards that are currently visible or just entering the viewport.
+      if (r.bottom > -80 && r.top < innerHeight + 120) visible.push(card);
+    }
+
+    if (!visible.length) return;
+
+    lastReplay = now;
+    visible.forEach((card,i)=>{
+      card.classList.remove('scroll-replay-card');
+      // Force a reflow so the same animation can replay every time.
+      void card.offsetWidth;
+      card.style.setProperty('--scroll-delay', `${Math.min(i*65,260)}ms`);
+      card.classList.add('scroll-replay-card');
+
+      clearTimeout(card._v19Timer);
+      card._v19Timer = setTimeout(()=>{
+        card.classList.remove('scroll-replay-card');
+      }, 1200);
+    });
+  }
+
+  function onScroll(){
+    const y=scrollY;
+    const dy=y-lastY;
+    lastY=y;
+
+    if (dy > 0){
+      accumulatedDown += dy;
+      // Replay after each meaningful downward scroll distance.
+      if (accumulatedDown >= 85){
+        accumulatedDown=0;
+        if (!ticking){
+          ticking=true;
+          requestAnimationFrame(()=>{
+            replayVisibleCards();
+            ticking=false;
+          });
+        }
+      }
+    } else if (dy < 0){
+      // Scrolling upward resets the distance counter; the next downward
+      // movement can trigger the animation again.
+      accumulatedDown=0;
+    }
+  }
+
+  addEventListener('scroll',onScroll,{passive:true});
+})();

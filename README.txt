@@ -21,3 +21,5 @@ V15: Added a smooth cursor-following cyan/violet glow with a bright pointer core
 V16: Added moving energy arcs, diagonal energy streaks, orbiting particles, scan pulses, and stronger mouse tilt (up to ~12°/14°).
 
 V18: Preserved V16 and added the reference-style scroll-reactive 3D background element as an additive layer only.
+
+V19: Added replayable 3D fold/entrance card animation on meaningful downward scrolling while preserving all V18 effects.
