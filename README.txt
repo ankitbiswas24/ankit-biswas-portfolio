@@ -1,16 +1,23 @@
-ANKIT BISWAS — 3D TECH RESUME WEBSITE
+ANKIT BISWAS — VIDEO-STYLE PORTFOLIO V13
 
-Open index.html directly or run with VS Code Live Server.
+This version recreates the uploaded reference video's visual direction:
+- dark navy sci-fi background
+- cyan/violet HUD accents
+- large centered hero identity
+- thin orbital/radar 3D background
+- technical section labels
+- outlined glass engineering cards
+- smooth one-time fold-out card entrance
+- subtle mouse tilt
+- scroll-linked background camera
+- responsive mobile layout
 
-Features:
-- Futuristic embedded-systems visual language
-- 3D scroll depth / section perspective
-- Interactive card tilt + dynamic internal glow
-- Mouse-following black-hole / lensing glow
-- Hero orbital parallax
-- Floating data particles
-- Scroll progress indicator
-- Responsive mobile layout
-- No external JavaScript libraries required
+Deploy index.html, style.css and script.js to GitHub Pages.
 
-Edit contact details, LinkedIn URL and project text in index.html.
+V14: Added a smooth dynamic background energy field with drifting particles, flowing lanes, cursor parallax, atmospheric wells, and a subtle scanning beam.
+
+V15: Added a smooth cursor-following cyan/violet glow with a bright pointer core and motion bloom.
+
+V16: Added moving energy arcs, diagonal energy streaks, orbiting particles, scan pulses, and stronger mouse tilt (up to ~12°/14°).
+
+V18: Preserved V16 and added the reference-style scroll-reactive 3D background element as an additive layer only.

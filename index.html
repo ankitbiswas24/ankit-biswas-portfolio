@@ -11,9 +11,27 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="cursor-glow"></div>
-  <div class="blackhole" aria-hidden="true"><div class="bh-ring bh-ring-1"></div><div class="bh-ring bh-ring-2"></div><div class="bh-core"></div><div class="bh-lens"></div></div>
-  <div class="noise"></div>
+  <canvas id="scene3d" aria-hidden="true"></canvas>
+<div id="cursorGlow" aria-hidden="true"></div>
+    <canvas id="scrollCore" aria-hidden="true"></canvas>
+    <canvas id="energyField" aria-hidden="true"></canvas>
+    <canvas id="dynamicField" aria-hidden="true"></canvas>
+    <div id="interactive3d" aria-hidden="true">
+  <div class="radar-system">
+    <div class="radar-ring rr1"></div>
+    <div class="radar-ring rr2"></div>
+    <div class="radar-ring rr3"></div>
+    <div class="radar-axis ax1"></div>
+    <div class="radar-axis ax2"></div>
+    <div class="radar-core"><span></span></div>
+    <div class="radar-orbit ro1"><i></i></div>
+    <div class="radar-orbit ro2"><i></i></div>
+  </div>
+  <div class="bg-label bg-label-a">SYS.01 // ACTIVE</div>
+  <div class="bg-label bg-label-b">NOIDA // 28.53°N</div>
+</div>
+<div class="grid-overlay"></div>
+  
   <div class="scanlines"></div>
   <div class="progress"><span id="progressBar"></span></div>
 
@@ -27,9 +45,7 @@
 
   <main>
     <section id="home" class="hero section">
-      <div class="hero-orbit orbit-a"></div><div class="hero-orbit orbit-b"></div><div class="hero-orbit orbit-c"></div>
-      <div class="data-particles"></div>
-      <div class="atom"><div class="atom-core"></div><span class="atom-dot d1"></span><span class="atom-dot d2"></span><span class="atom-dot d3"></span></div>
+      
       <div class="hero-content reveal">
         <div class="eyebrow"><span class="pulse"></span> SYSTEM ONLINE // EMBEDDED ENGINEERING NODE</div>
         <h1>ANKIT <em>BISWAS</em></h1>
@@ -38,12 +54,12 @@
         <div class="contact-pills"><a href="mailto:biswasankit24@gmail.com">✉ MAIL</a><a href="tel:+916295256858">⌕ +91 6295256858</a><a href="#contact">in LINKEDIN</a><span>⌖ NOIDA / INDIA</span></div>
         <a class="scroll-cue" href="#about"><span>SCROLL // DECRYPT PROFILE</span><b>↓</b></a>
       </div>
-      <div class="hero-terminal"><span>BOOT</span> 0x01 → MCU_INIT → PERIPHERAL_MAP → FW_READY <i>●</i></div>
+      <div class="hero-terminal"><span>BOOT</span> 0x01 → MCU_INIT → PERIPHERAL_MAP → FW_READY <i>●</i></div><div class="hero-status">[ SYSTEM / EMBEDDED ENGINEERING ]</div>
     </section>
 
     <section id="about" class="section content-section">
       <div class="section-label"><span>00</span> SYSTEM_PROFILE // 0x00</div>
-      <div class="glass profile-card depth-card reveal">
+      <div class="glass profile-card depth-card reveal fold-card">
         <div class="card-corner">PROFILE_NODE</div>
         <p><strong>EMBEDDED SYSTEMS ENGINEER</strong> focused on low-level firmware, peripheral control and connected devices. Hands-on with Embedded C, STM32, AVR, ESP8266 and Arduino through industrial training and hardware-driven builds. Comfortable moving from <span class="accent">registers → drivers → sensors → communication → system validation</span>.</p>
         <p class="terminal-copy">// CORE_OBJECTIVE: convert hardware requirements into deterministic, testable firmware.</p>
@@ -53,7 +69,7 @@
 
     <section id="experience" class="section content-section">
       <div class="section-label"><span>01</span> EXECUTION_LOG // EXPERIENCE</div>
-      <article class="glass timeline-card depth-card reveal">
+      <article class="glass timeline-card depth-card reveal fold-card">
         <div class="date">FEB 2026 — PRESENT</div><div class="status"><span></span> ACTIVE PROCESS</div>
         <h2>Embedded Systems Intern <em>@ SOFCON</em></h2><h3>Sofcon India Pvt Ltd // Noida</h3>
         <ul>
@@ -69,28 +85,28 @@
     <section id="skills" class="section content-section">
       <div class="section-label"><span>02</span> TECH_STACK // CAPABILITIES</div>
       <div class="skills-grid">
-        <div class="glass skill-card depth-card reveal"><span>01 // LANGUAGE_LAYER</span><h3>C / FIRMWARE</h3><div><b>Embedded C</b><b>C</b><b>Pointers</b><b>Interrupts</b><b>Timers</b><b>ADC</b><b>PWM</b></div></div>
-        <div class="glass skill-card depth-card reveal"><span>02 // MCU_LAYER</span><h3>MICROCONTROLLERS</h3><div><b>STM32F103</b><b>STM32F401</b><b>AVR</b><b>8051 Basics</b><b>ARM Cortex-M</b><b>Arduino</b></div></div>
-        <div class="glass skill-card depth-card reveal"><span>03 // BUS_LAYER</span><h3>COMMUNICATION</h3><div><b>UART</b><b>SPI</b><b>I2C</b><b>GPIO</b><b>CAN Concepts</b><b>RTOS Concepts</b></div></div>
-        <div class="glass skill-card depth-card reveal"><span>04 // CONNECTIVITY_LAYER</span><h3>IoT / NETWORK</h3><div><b>ESP8266</b><b>NodeMCU</b><b>Wi-Fi</b><b>HTTP</b><b>Cloud Control</b></div></div>
-        <div class="glass skill-card depth-card reveal"><span>05 // TOOLCHAIN</span><h3>DEBUG / BUILD</h3><div><b>STM32CubeIDE</b><b>STM32CubeMX</b><b>ST-Link</b><b>Proteus</b><b>Microchip Studio</b><b>Arduino IDE</b><b>Git</b></div></div>
-        <div class="glass skill-card depth-card reveal"><span>06 // SYSTEM_LAYER</span><h3>ENGINEERING</h3><div><b>Sensor Integration</b><b>Hardware Debug</b><b>Firmware Testing</b><b>Data Analytics</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>01 // LANGUAGE_LAYER</span><h3>C / FIRMWARE</h3><div><b>Embedded C</b><b>C</b><b>Pointers</b><b>Interrupts</b><b>Timers</b><b>ADC</b><b>PWM</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>02 // MCU_LAYER</span><h3>MICROCONTROLLERS</h3><div><b>STM32F103</b><b>STM32F401</b><b>AVR</b><b>8051 Basics</b><b>ARM Cortex-M</b><b>Arduino</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>03 // BUS_LAYER</span><h3>COMMUNICATION</h3><div><b>UART</b><b>SPI</b><b>I2C</b><b>GPIO</b><b>CAN Concepts</b><b>RTOS Concepts</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>04 // CONNECTIVITY_LAYER</span><h3>IoT / NETWORK</h3><div><b>ESP8266</b><b>NodeMCU</b><b>Wi-Fi</b><b>HTTP</b><b>Cloud Control</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>05 // TOOLCHAIN</span><h3>DEBUG / BUILD</h3><div><b>STM32CubeIDE</b><b>STM32CubeMX</b><b>ST-Link</b><b>Proteus</b><b>Microchip Studio</b><b>Arduino IDE</b><b>Git</b></div></div>
+        <div class="glass skill-card depth-card reveal fold-card"><span>06 // SYSTEM_LAYER</span><h3>ENGINEERING</h3><div><b>Sensor Integration</b><b>Hardware Debug</b><b>Firmware Testing</b><b>Data Analytics</b></div></div>
       </div>
     </section>
 
     <section id="projects" class="section content-section projects-section">
       <div class="section-label"><span>03</span> BUILD_ARCHIVE // PROJECTS</div>
       <div class="project-grid">
-        <article class="glass project-card depth-card reveal"><div class="project-index">BUILD_01</div><div class="project-meta">APR 2026 — AUG 2026 // ACTIVE BUILD</div><h2>IoT Dot Matrix Display <em>// MATRIX_UI</em></h2><div class="tags"><b>Embedded C</b><b>GPIO</b><b>Multiplexing</b><b>Wi-Fi</b></div><p>Engineered an 8×8 dot-matrix display pipeline with web-driven text input, scrolling output and chained-display expansion. Focus: GPIO timing, multiplexing and network-to-device control.</p><div class="project-line"></div><small>DATA_FLOW: WEB → ESP8266 → GPIO → MATRIX → SCROLL</small></article>
-        <article class="glass project-card depth-card reveal"><div class="project-index">BUILD_02</div><div class="project-meta">JAN 2026 — MAR 2026 // IOT BUILD</div><h2>Smart Soil Irrigation <em>// AUTO_CTRL</em></h2><div class="tags"><b>NodeMCU</b><b>Sensors</b><b>Wi-Fi</b><b>Relay</b></div><p>Designed an automated irrigation node using soil-moisture sensing, environmental inputs and relay-based pump control with Wi-Fi connectivity.</p><div class="project-line"></div><small>DATA_FLOW: SENSOR → MCU → DECISION → RELAY → PUMP</small></article>
-        <article class="glass project-card depth-card reveal"><div class="project-index">BUILD_03</div><div class="project-meta">2026 // TIMER CORE</div><h2>STM32 30-Minute Timer <em>// TIM2</em></h2><div class="tags"><b>STM32</b><b>TIM2</b><b>Interrupt</b><b>7-Segment</b></div><p>Implemented a countdown engine using TIM2 interrupt scheduling, multiplexed 4-digit seven-segment output and buzzer notification.</p><div class="project-line"></div><small>CORE: CLOCK → TIMER → ISR → DISPLAY → BUZZER</small></article>
-        <article class="glass project-card depth-card reveal"><div class="project-index">BUILD_04</div><div class="project-meta">2026 // SENSOR NODE</div><h2>Arduino AQI Detector <em>// MQ-135</em></h2><div class="tags"><b>Arduino Nano</b><b>MQ-135</b><b>ADC</b><b>LED</b></div><p>Built an air-quality sensing node that samples MQ-135 output, evaluates the measured level and drives visual status indication.</p><div class="project-line"></div><small>DATA_FLOW: SENSOR → ADC → THRESHOLD → STATUS_LED</small></article>
+        <article class="glass project-card depth-card reveal fold-card"><div class="project-index">BUILD_01</div><div class="project-meta">APR 2026 — AUG 2026 // ACTIVE BUILD</div><h2>IoT Dot Matrix Display <em>// MATRIX_UI</em></h2><div class="tags"><b>Embedded C</b><b>GPIO</b><b>Multiplexing</b><b>Wi-Fi</b></div><p>Engineered an 8×8 dot-matrix display pipeline with web-driven text input, scrolling output and chained-display expansion. Focus: GPIO timing, multiplexing and network-to-device control.</p><div class="project-line"></div><small>DATA_FLOW: WEB → ESP8266 → GPIO → MATRIX → SCROLL</small></article>
+        <article class="glass project-card depth-card reveal fold-card"><div class="project-index">BUILD_02</div><div class="project-meta">JAN 2026 — MAR 2026 // IOT BUILD</div><h2>Smart Soil Irrigation <em>// AUTO_CTRL</em></h2><div class="tags"><b>NodeMCU</b><b>Sensors</b><b>Wi-Fi</b><b>Relay</b></div><p>Designed an automated irrigation node using soil-moisture sensing, environmental inputs and relay-based pump control with Wi-Fi connectivity.</p><div class="project-line"></div><small>DATA_FLOW: SENSOR → MCU → DECISION → RELAY → PUMP</small></article>
+        <article class="glass project-card depth-card reveal fold-card"><div class="project-index">BUILD_03</div><div class="project-meta">2026 // TIMER CORE</div><h2>STM32 30-Minute Timer <em>// TIM2</em></h2><div class="tags"><b>STM32</b><b>TIM2</b><b>Interrupt</b><b>7-Segment</b></div><p>Implemented a countdown engine using TIM2 interrupt scheduling, multiplexed 4-digit seven-segment output and buzzer notification.</p><div class="project-line"></div><small>CORE: CLOCK → TIMER → ISR → DISPLAY → BUZZER</small></article>
+        <article class="glass project-card depth-card reveal fold-card"><div class="project-index">BUILD_04</div><div class="project-meta">2026 // SENSOR NODE</div><h2>Arduino AQI Detector <em>// MQ-135</em></h2><div class="tags"><b>Arduino Nano</b><b>MQ-135</b><b>ADC</b><b>LED</b></div><p>Built an air-quality sensing node that samples MQ-135 output, evaluates the measured level and drives visual status indication.</p><div class="project-line"></div><small>DATA_FLOW: SENSOR → ADC → THRESHOLD → STATUS_LED</small></article>
       </div>
     </section>
 
     <section id="contact" class="section contact-section">
       <div class="contact-orbit"></div><div class="section-label"><span>04</span> LINK_TERMINAL // CONTACT</div>
-      <div class="glass contact-card depth-card reveal"><div><p class="eyebrow">STATUS: OPEN_TO_WORK // EMBEDDED / IoT</p><h2>READY TO<br><em>BUILD AT THE EDGE.</em></h2><p class="contact-command">$ ./connect --role embedded-engineer --mode onsite/hybrid</p></div><a class="big-mail" href="mailto:biswasankit24@gmail.com">biswasankit24@gmail.com ↗</a><div class="contact-bottom"><span>NOIDA // INDIA</span><span>STM32 • EMBEDDED C • IoT</span><a href="#home">REBOOT ↑</a></div></div>
+      <div class="glass contact-card depth-card reveal fold-card"><div><p class="eyebrow">STATUS: OPEN_TO_WORK // EMBEDDED / IoT</p><h2>READY TO<br><em>BUILD AT THE EDGE.</em></h2><p class="contact-command">$ ./connect --role embedded-engineer --mode onsite/hybrid</p></div><a class="big-mail" href="mailto:biswasankit24@gmail.com">biswasankit24@gmail.com ↗</a><div class="contact-bottom"><span>NOIDA // INDIA</span><span>STM32 • EMBEDDED C • IoT</span><a href="#home">REBOOT ↑</a></div></div>
     </section>
   </main>
   <footer>© 2026 ANKIT BISWAS // EMBEDDED SYSTEMS ENGINEER // SYSTEM TERMINATED CLEANLY</footer>
